@@ -1,0 +1,66 @@
+﻿@model VisionCollegeDSEDMarkingPortal.Models.MarkingScheduleTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MarkingScheduleTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Excellent100)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Excellent100)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adequate80)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adequate80)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Poor60)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Poor60)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotMet0)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotMet0)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percentage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MarkingScheduleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

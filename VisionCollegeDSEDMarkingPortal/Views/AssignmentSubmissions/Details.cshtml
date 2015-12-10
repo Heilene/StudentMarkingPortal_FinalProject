@@ -1,0 +1,66 @@
+﻿@model VisionCollegeDSEDMarkingPortal.Models.AssignmentSubmission
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AssignmentSubmission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateSubmitted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateSubmitted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkToFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkToFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instructions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instructions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModuleDetail.ModuleCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModuleDetail.ModuleCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentDetail.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentDetail.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssignmentSubmittedID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

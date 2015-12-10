@@ -1,0 +1,64 @@
+﻿@model IEnumerable<VisionCollegeDSEDMarkingPortal.Models.AssignmentSubmission>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateSubmitted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkToFile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instructions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModuleDetail.ModuleCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result.Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentDetail.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateSubmitted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkToFile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Instructions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModuleDetail.ModuleCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result.Summary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentDetail.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AssignmentSubmittedID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AssignmentSubmittedID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssignmentSubmittedID }) |
+            @Html.ActionLink("Result", "AssignmentResultView", new { id = item.AssignmentSubmittedID }) 
+        </td>
+    </tr>
+}
+
+</table>

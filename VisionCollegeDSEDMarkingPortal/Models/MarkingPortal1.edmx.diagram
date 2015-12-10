@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88b6043dc3f84610b632aff77cdf333a" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentPortalDBModel.AchievedElement" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.AssignmentSubmission" Width="1.5" PointX="8.375" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.MarkingOverviewTitle" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.MarkingScheduleOverview" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.MarkingScheduleTable" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.ModuleDetail" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.ModuleEnrollment" Width="1.5" PointX="3.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.Result" Width="1.5" PointX="5.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentPortalDBModel.StudentDetail" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_AchievedElements_MarkingSOverview" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_AchievedElements_Results" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_ModuleEnrollments_AssignmentSubmission" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_MarkingSOverview_MarkingOverviewTitles1" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_MarkingSOverview_ModuleDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_ModulesAssignedToStudents_ModuleDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_ModuleEnrollments_Results" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentPortalDBModel.FK_ModulesAssignedToStudents_StudentDetails" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,158 @@
+﻿@model  VisionCollegeDSEDMarkingPortal.Models.ViewModels.MarkingVM
+@{
+    ViewBag.Title = "MarkingToolView";
+}
+
+<h2 class="text-primary">@ViewBag.ModuleDeets</h2>
+
+<h3>@ViewBag.StudentDeets</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+ 
+        <div class="form-group">
+            <h3 class="text-primary">@Html.DisplayNameFor(m => m.MyResults.RSummary)</h3>
+            
+                @Html.TextAreaFor(m => m.Summary, new { style = "width: 100%; height: 150px", htmlAttributes = new { @class = "form-control"} })
+                @Html.HiddenFor(m => m.ModuleID)
+            
+        </div>
+    
+
+    <div class="form-group">
+        <h3 class="text-primary">Marking Overview</h3>
+
+        <table class="table table-bordered">
+
+            @*For each title in my module i want to display the list of comments attached to that titleID*@
+            @foreach (var myItem in Model.MyOverviewTitles)
+                {
+                <tr>
+                    <td>@Html.LabelFor(m => m.MyOverviewTitles, myItem.myOverviewTitle)</td>
+                </tr>
+                <tr>
+                    <td>
+
+                        @for (int i = 0; i < Model.MarkAchievedList.Count; i++)
+                        {
+                            if (myItem.myOverviewTitle == Model.MarkAchievedList[i].OverviewTitle)
+                            {
+                                @Html.HiddenFor(c => c.MarkAchievedList[i].OverViewID)
+                                <p>@Html.CheckBoxFor(c => c.MarkAchievedList[i].CheckedValue) @Html.DisplayFor(c => c.MarkAchievedList[i].MyComment)</p>
+                            }
+                        }
+
+
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+    <p></p>
+
+    <h3 class="text-primary">Rubric Table</h3>
+
+    @*I created partial views for the rubric table so I can reuse these in the create, edit and result views*@
+
+    <div class="form-group">
+        @*this is my code for the rubric table row 1*@
+        <table class="table table-bordered">
+
+            @Html.Partial("_RubricResultsRow1")
+
+
+            <tr>
+                <td width="14%">Mark</td>
+                @foreach (var item in Model.myMarksSet1)
+                {
+                    <td width="21%" align="center">@Html.RadioButtonFor(x => x.MyResults.RMark1, item.MarkValue) @item.MarkValue</td>
+                }
+            </tr>
+            @Html.Partial("_RubricTableHeadings")
+
+        </table>
+    </div>
+
+    <div class="form-group">
+        @*this is my code for the rubric table row 2*@
+        <table class="table table-bordered">
+
+            @Html.Partial("_RubricResultsRow2")
+
+
+            <tr>
+                <td width="14%">Mark</td>
+                @foreach (var item in Model.myMarksSet2)
+                {
+                    <td width="21%" align="center">@Html.RadioButtonFor(x => x.MyResults.RMark2, item.MarkValue) @item.MarkValue</td>
+                }
+            </tr>
+            @Html.Partial("_RubricTableHeadings")
+        </table>
+    </div>
+
+    <div class="form-group">
+        @*this is my code for the rubric table row3*@
+        <table class="table table-bordered">
+
+            @Html.Partial("_RubricResultsRow3")
+
+
+            <tr>
+                <td width="14%">Mark</td>
+                @foreach (var item in Model.myMarksSet3)
+                {
+                    <td width="21%" align="center">@Html.RadioButtonFor(x => x.MyResults.RMark3, item.MarkValue) @item.MarkValue</td>
+                }
+            </tr>
+            @Html.Partial("_RubricTableHeadings")
+        </table>
+    </div>
+
+    <div class="form-group">
+        @*this is my code for the rubric table Row 4*@
+        <table class="table table-bordered">
+
+            @Html.Partial("_RubricResultsRow4")
+
+
+            <tr>
+                <td width="14%">Mark</td>
+                @foreach (var item in Model.myMarksSet4)
+                {
+                    <td width="21%" align="center">@Html.RadioButtonFor(x => x.MyResults.RMark4, item.MarkValue) @item.MarkValue</td>
+                }
+            </tr>
+            @Html.Partial("_RubricTableHeadings")
+        </table>
+    </div>
+
+    <div class="form-group">
+        @*this is my code for the rubric table row 5*@
+        <table class="table table-bordered">
+
+            @Html.Partial("_RubricResultsRow5")
+
+
+
+            <tr>
+                <td width="14%">Mark</td>
+                @foreach (var item in Model.myMarksSet5)
+                {
+                    <td width="21%" align="center">@Html.RadioButtonFor(x => x.MyResults.RMark5, item.MarkValue) @item.MarkValue</td>
+                }
+            </tr>
+
+            @Html.Partial("_RubricTableHeadings")
+        </table>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+
+}
+

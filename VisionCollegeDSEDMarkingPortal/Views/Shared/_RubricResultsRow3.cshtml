@@ -1,0 +1,30 @@
+﻿@model VisionCollegeDSEDMarkingPortal.Models.ViewModels.MarkingVM
+
+
+
+
+
+    @foreach (var item in Model.MyTableRow3)
+    {
+        <tr>
+            <td colspan="5"><h4>@Html.DisplayFor(t => item.Title)</h4></td>
+        </tr>
+        <tr>
+            <td align="center" width="14%">
+                @Html.DisplayFor(t => item.Percentage)%
+            </td>
+            <td width="21%" style="@item.ExcellentBGColour">
+                @Html.DisplayFor(t => item.ExcellentDesc)
+            </td>
+            <td width="21%" style="@item.AdequateBGColour">
+                @Html.DisplayFor(t => item.AdequateDesc)
+            </td>
+            <td width="21%" style="@item.PoorBGColour">
+                @Html.DisplayFor(t => item.PoorDesc)
+            </td>
+            <td width="21%" style="@item.NotMetBGColour">
+                @Html.DisplayFor(t => item.NotMetDesc)
+            </td>
+        </tr>
+    }
+

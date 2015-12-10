@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Online Marking Tool</h1>
+    <p class="lead">Welcome to the online marking tool. Please select option from menu below</p>
+    <p><a class="btn btn-primary" onclick="location.href='@Url.Action( "Index", "StudentDetails",  new { })'">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Students</h2>
+        <p>
+            Add, delete or edit student details. Click on the button bellow to view student list
+        </p>
+        <p><a class="btn btn-primary" onclick="location.href='@Url.Action( "Index", "StudentDetails",  new { })'">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Modules</h2>
+        <p>Add, delete or edit modules. Click on the button bellow to view all modules related to Software Engineering and Design course</p>
+        <p><a class="btn btn-primary" onclick="location.href='@Url.Action( "Index", "ModuleDetails",  new { })'">Learn more &raquo;</a></p>
+    </div>
+    @*<div class="col-md-4">
+        <h2>TBA</h2>
+        <p>TBA</p>
+        <p><a class="btn btn-primary"onclick="location.href='@Url.Action( "Index", "StudentDetails",  new { })'">Learn more &raquo;</a></p>
+    </div>*@
+</div>

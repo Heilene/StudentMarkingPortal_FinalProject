@@ -1,0 +1,116 @@
+﻿@model VisionCollegeDSEDMarkingPortal.Models.StudentDetail
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Student Details</h4> @*Display Student details *@
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+
+            @if (Model.MiddleName != null)
+            { @*Display only if there is a middle name*@
+                <dt>
+                    @Html.DisplayNameFor(model => model.MiddleName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MiddleName)
+                </dd>
+            }
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            @*<dt>
+                @Html.DisplayNameFor(model => model.Picture)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Picture)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateEnrolled)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateEnrolled)
+            </dd>*@
+        </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
+            @Html.ActionLink("Back to student list", "Index")
+        </p>
+    </div>
+    <div class="col-md-8">
+        <h4>Modules</h4> @*Display Enrolled module details *@
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                <table class="table" align="left">
+                    <tr>
+                        <th>Code</th>
+                        <th>Module Name</th>
+                        <th></th>
+                        <th></th>
+
+
+                    </tr>
+                    @foreach (var item in Model.ModuleEnrollments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModuleDetail.ModuleCode) @*Add the code for each module*@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModuleDetail.ModuleName) @*Add the name for each module*@
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action( "MarkingToolView", "StudentDetails",  new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID})'">Mark</button></td>
+
+                                @if (item.ReslutsFK != null)
+                                {
+                                    <td><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ResultView", "StudentDetails", new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID })'">Result</button></td>
+                                }
+                                                        
+                        </tr>
+                    }
+                </table>
+            </dd>
+        </dl>
+    </div>
+</div>

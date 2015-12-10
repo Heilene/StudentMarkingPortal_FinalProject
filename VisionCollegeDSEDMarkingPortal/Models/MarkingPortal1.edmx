@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentPortalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AchievedElements">
+          <Key>
+            <PropertyRef Name="AchevedID" />
+          </Key>
+          <Property Name="AchevedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResultFk" Type="int" />
+          <Property Name="MSOverviewFK" Type="int" />
+          <Property Name="AchievedItem" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AssignmentSubmission">
+          <Key>
+            <PropertyRef Name="AssignmentSubmittedID" />
+          </Key>
+          <Property Name="AssignmentSubmittedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateSubmitted" Type="datetime" />
+          <Property Name="LinkToFile" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Instructions" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MarkingOverviewTitles">
+          <Key>
+            <PropertyRef Name="OverviewTitleID" />
+          </Key>
+          <Property Name="OverviewTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MarkingScheduleOverview">
+          <Key>
+            <PropertyRef Name="MSOverviewID" />
+          </Key>
+          <Property Name="MSOverviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleFK" Type="int" />
+          <Property Name="OverviewTitleFK" Type="int" />
+          <Property Name="CommentItem" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MarkingScheduleTable">
+          <Key>
+            <PropertyRef Name="MarkingScheduleID" />
+          </Key>
+          <Property Name="MarkingScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Excellent100" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ExcelentMark" Type="int" Nullable="false" />
+          <Property Name="Adequate80" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AdequateMark" Type="int" Nullable="false" />
+          <Property Name="Poor60" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PoorMark" Type="int" Nullable="false" />
+          <Property Name="NotMet0" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NotMetMark" Type="int" Nullable="false" />
+          <Property Name="Percentage" Type="int" />
+        </EntityType>
+        <EntityType Name="ModuleDetails">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="nvarchar(max)" />
+          <Property Name="ModuleDescription" Type="nvarchar(max)" />
+          <Property Name="AssignmentFile" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ModuleEnrollments">
+          <Key>
+            <PropertyRef Name="ModulesAssignedID" />
+          </Key>
+          <Property Name="ModulesAssignedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentFk" Type="int" />
+          <Property Name="ModuleFk" Type="int" />
+          <Property Name="ReslutsFK" Type="int" />
+          <Property Name="AssignmentSubmissionFK" Type="int" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="ResultsID" />
+          </Key>
+          <Property Name="ResultsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mark1" Type="int" Nullable="false" />
+          <Property Name="Mark2" Type="int" Nullable="false" />
+          <Property Name="Mark3" Type="int" Nullable="false" />
+          <Property Name="Mark4" Type="int" Nullable="false" />
+          <Property Name="Mark5" Type="int" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar(max)" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentDetails">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="DateEnrolled" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_AchievedElements_MarkingSOverview">
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="0..1" />
+          <End Role="AchievedElements" Type="Self.AchievedElements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarkingScheduleOverview">
+              <PropertyRef Name="MSOverviewID" />
+            </Principal>
+            <Dependent Role="AchievedElements">
+              <PropertyRef Name="MSOverviewFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AchievedElements_Results">
+          <End Role="Results" Type="Self.Results" Multiplicity="0..1" />
+          <End Role="AchievedElements" Type="Self.AchievedElements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Results">
+              <PropertyRef Name="ResultsID" />
+            </Principal>
+            <Dependent Role="AchievedElements">
+              <PropertyRef Name="ResultFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkingSOverview_MarkingOverviewTitles1">
+          <End Role="MarkingOverviewTitles" Type="Self.MarkingOverviewTitles" Multiplicity="0..1" />
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarkingOverviewTitles">
+              <PropertyRef Name="OverviewTitleID" />
+            </Principal>
+            <Dependent Role="MarkingScheduleOverview">
+              <PropertyRef Name="OverviewTitleFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkingSOverview_ModuleDetails">
+          <End Role="ModuleDetails" Type="Self.ModuleDetails" Multiplicity="0..1" />
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleDetails">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="MarkingScheduleOverview">
+              <PropertyRef Name="ModuleFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleEnrollments_AssignmentSubmission">
+          <End Role="AssignmentSubmission" Type="Self.AssignmentSubmission" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssignmentSubmission">
+              <PropertyRef Name="AssignmentSubmittedID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="AssignmentSubmissionFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleEnrollments_Results">
+          <End Role="Results" Type="Self.Results" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Results">
+              <PropertyRef Name="ResultsID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="ReslutsFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModulesAssignedToStudents_ModuleDetails">
+          <End Role="ModuleDetails" Type="Self.ModuleDetails" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleDetails">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="ModuleFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModulesAssignedToStudents_StudentDetails">
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentDetails">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="StudentFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentPortalDBModelStoreContainer">
+          <EntitySet Name="AchievedElements" EntityType="Self.AchievedElements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignmentSubmission" EntityType="Self.AssignmentSubmission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkingOverviewTitles" EntityType="Self.MarkingOverviewTitles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkingScheduleOverview" EntityType="Self.MarkingScheduleOverview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkingScheduleTable" EntityType="Self.MarkingScheduleTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleEnrollments" EntityType="Self.ModuleEnrollments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AchievedElements_MarkingSOverview" Association="Self.FK_AchievedElements_MarkingSOverview">
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverview" />
+            <End Role="AchievedElements" EntitySet="AchievedElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AchievedElements_Results" Association="Self.FK_AchievedElements_Results">
+            <End Role="Results" EntitySet="Results" />
+            <End Role="AchievedElements" EntitySet="AchievedElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkingSOverview_MarkingOverviewTitles1" Association="Self.FK_MarkingSOverview_MarkingOverviewTitles1">
+            <End Role="MarkingOverviewTitles" EntitySet="MarkingOverviewTitles" />
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkingSOverview_ModuleDetails" Association="Self.FK_MarkingSOverview_ModuleDetails">
+            <End Role="ModuleDetails" EntitySet="ModuleDetails" />
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleEnrollments_AssignmentSubmission" Association="Self.FK_ModuleEnrollments_AssignmentSubmission">
+            <End Role="AssignmentSubmission" EntitySet="AssignmentSubmission" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleEnrollments_Results" Association="Self.FK_ModuleEnrollments_Results">
+            <End Role="Results" EntitySet="Results" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModulesAssignedToStudents_ModuleDetails" Association="Self.FK_ModulesAssignedToStudents_ModuleDetails">
+            <End Role="ModuleDetails" EntitySet="ModuleDetails" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModulesAssignedToStudents_StudentDetails" Association="Self.FK_ModulesAssignedToStudents_StudentDetails">
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentPortalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AchievedElement">
+          <Key>
+            <PropertyRef Name="AchevedID" />
+          </Key>
+          <Property Name="AchevedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResultFk" Type="Int32" />
+          <Property Name="MSOverviewFK" Type="Int32" />
+          <Property Name="AchievedItem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarkingScheduleOverview" Relationship="Self.FK_AchievedElements_MarkingSOverview" FromRole="AchievedElements" ToRole="MarkingScheduleOverview" />
+          <NavigationProperty Name="Result" Relationship="Self.FK_AchievedElements_Results" FromRole="AchievedElements" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="AssignmentSubmission">
+          <Key>
+            <PropertyRef Name="AssignmentSubmittedID" />
+          </Key>
+          <Property Name="AssignmentSubmittedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
+          <Property Name="LinkToFile" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ModuleEnrollments" Relationship="Self.FK_ModuleEnrollments_AssignmentSubmission" FromRole="AssignmentSubmission" ToRole="ModuleEnrollments" />
+        </EntityType>
+        <EntityType Name="MarkingOverviewTitle">
+          <Key>
+            <PropertyRef Name="OverviewTitleID" />
+          </Key>
+          <Property Name="OverviewTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarkingScheduleOverviews" Relationship="Self.FK_MarkingSOverview_MarkingOverviewTitles1" FromRole="MarkingOverviewTitles" ToRole="MarkingScheduleOverview" />
+        </EntityType>
+        <EntityType Name="MarkingScheduleOverview">
+          <Key>
+            <PropertyRef Name="MSOverviewID" />
+          </Key>
+          <Property Name="MSOverviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleFK" Type="Int32" />
+          <Property Name="OverviewTitleFK" Type="Int32" />
+          <Property Name="CommentItem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AchievedElements" Relationship="Self.FK_AchievedElements_MarkingSOverview" FromRole="MarkingScheduleOverview" ToRole="AchievedElements" />
+          <NavigationProperty Name="MarkingOverviewTitle" Relationship="Self.FK_MarkingSOverview_MarkingOverviewTitles1" FromRole="MarkingScheduleOverview" ToRole="MarkingOverviewTitles" />
+          <NavigationProperty Name="ModuleDetail" Relationship="Self.FK_MarkingSOverview_ModuleDetails" FromRole="MarkingScheduleOverview" ToRole="ModuleDetails" />
+        </EntityType>
+        <EntityType Name="MarkingScheduleTable">
+          <Key>
+            <PropertyRef Name="MarkingScheduleID" />
+          </Key>
+          <Property Name="MarkingScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Excellent100" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ExcelentMark" Type="Int32" Nullable="false" />
+          <Property Name="Adequate80" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AdequateMark" Type="Int32" Nullable="false" />
+          <Property Name="Poor60" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PoorMark" Type="Int32" Nullable="false" />
+          <Property Name="NotMet0" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NotMetMark" Type="Int32" Nullable="false" />
+          <Property Name="Percentage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ModuleDetail">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AssignmentFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarkingScheduleOverviews" Relationship="Self.FK_MarkingSOverview_ModuleDetails" FromRole="ModuleDetails" ToRole="MarkingScheduleOverview" />
+          <NavigationProperty Name="ModuleEnrollments" Relationship="Self.FK_ModulesAssignedToStudents_ModuleDetails" FromRole="ModuleDetails" ToRole="ModuleEnrollments" />
+        </EntityType>
+        <EntityType Name="ModuleEnrollment">
+          <Key>
+            <PropertyRef Name="ModulesAssignedID" />
+          </Key>
+          <Property Name="ModulesAssignedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentFk" Type="Int32" />
+          <Property Name="ModuleFk" Type="Int32" />
+          <Property Name="ReslutsFK" Type="Int32" />
+          <Property Name="AssignmentSubmissionFK" Type="Int32" />
+          <NavigationProperty Name="AssignmentSubmission" Relationship="Self.FK_ModuleEnrollments_AssignmentSubmission" FromRole="ModuleEnrollments" ToRole="AssignmentSubmission" />
+          <NavigationProperty Name="ModuleDetail" Relationship="Self.FK_ModulesAssignedToStudents_ModuleDetails" FromRole="ModuleEnrollments" ToRole="ModuleDetails" />
+          <NavigationProperty Name="Result" Relationship="Self.FK_ModuleEnrollments_Results" FromRole="ModuleEnrollments" ToRole="Results" />
+          <NavigationProperty Name="StudentDetail" Relationship="Self.FK_ModulesAssignedToStudents_StudentDetails" FromRole="ModuleEnrollments" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultsID" />
+          </Key>
+          <Property Name="ResultsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark1" Type="Int32" Nullable="false" />
+          <Property Name="Mark2" Type="Int32" Nullable="false" />
+          <Property Name="Mark3" Type="Int32" Nullable="false" />
+          <Property Name="Mark4" Type="Int32" Nullable="false" />
+          <Property Name="Mark5" Type="Int32" Nullable="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Int32" />
+          <NavigationProperty Name="AchievedElements" Relationship="Self.FK_AchievedElements_Results" FromRole="Results" ToRole="AchievedElements" />
+          <NavigationProperty Name="ModuleEnrollments" Relationship="Self.FK_ModuleEnrollments_Results" FromRole="Results" ToRole="ModuleEnrollments" />
+        </EntityType>
+        <EntityType Name="StudentDetail">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DateEnrolled" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ModuleEnrollments" Relationship="Self.FK_ModulesAssignedToStudents_StudentDetails" FromRole="StudentDetails" ToRole="ModuleEnrollments" />
+        </EntityType>
+        <Association Name="FK_AchievedElements_MarkingSOverview">
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="0..1" />
+          <End Role="AchievedElements" Type="Self.AchievedElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarkingScheduleOverview">
+              <PropertyRef Name="MSOverviewID" />
+            </Principal>
+            <Dependent Role="AchievedElements">
+              <PropertyRef Name="MSOverviewFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AchievedElements_Results">
+          <End Role="Results" Type="Self.Result" Multiplicity="0..1" />
+          <End Role="AchievedElements" Type="Self.AchievedElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Results">
+              <PropertyRef Name="ResultsID" />
+            </Principal>
+            <Dependent Role="AchievedElements">
+              <PropertyRef Name="ResultFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleEnrollments_AssignmentSubmission">
+          <End Role="AssignmentSubmission" Type="Self.AssignmentSubmission" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssignmentSubmission">
+              <PropertyRef Name="AssignmentSubmittedID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="AssignmentSubmissionFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkingSOverview_MarkingOverviewTitles1">
+          <End Role="MarkingOverviewTitles" Type="Self.MarkingOverviewTitle" Multiplicity="0..1" />
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarkingOverviewTitles">
+              <PropertyRef Name="OverviewTitleID" />
+            </Principal>
+            <Dependent Role="MarkingScheduleOverview">
+              <PropertyRef Name="OverviewTitleFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkingSOverview_ModuleDetails">
+          <End Role="ModuleDetails" Type="Self.ModuleDetail" Multiplicity="0..1" />
+          <End Role="MarkingScheduleOverview" Type="Self.MarkingScheduleOverview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleDetails">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="MarkingScheduleOverview">
+              <PropertyRef Name="ModuleFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModulesAssignedToStudents_ModuleDetails">
+          <End Role="ModuleDetails" Type="Self.ModuleDetail" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleDetails">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="ModuleFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleEnrollments_Results">
+          <End Role="Results" Type="Self.Result" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Results">
+              <PropertyRef Name="ResultsID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="ReslutsFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModulesAssignedToStudents_StudentDetails">
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="0..1" />
+          <End Role="ModuleEnrollments" Type="Self.ModuleEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentDetails">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="ModuleEnrollments">
+              <PropertyRef Name="StudentFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentPortalDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AchievedElements" EntityType="Self.AchievedElement" />
+          <EntitySet Name="AssignmentSubmissions" EntityType="Self.AssignmentSubmission" />
+          <EntitySet Name="MarkingOverviewTitles" EntityType="Self.MarkingOverviewTitle" />
+          <EntitySet Name="MarkingScheduleOverviews" EntityType="Self.MarkingScheduleOverview" />
+          <EntitySet Name="MarkingScheduleTables" EntityType="Self.MarkingScheduleTable" />
+          <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetail" />
+          <EntitySet Name="ModuleEnrollments" EntityType="Self.ModuleEnrollment" />
+          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <AssociationSet Name="FK_AchievedElements_MarkingSOverview" Association="Self.FK_AchievedElements_MarkingSOverview">
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverviews" />
+            <End Role="AchievedElements" EntitySet="AchievedElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AchievedElements_Results" Association="Self.FK_AchievedElements_Results">
+            <End Role="Results" EntitySet="Results" />
+            <End Role="AchievedElements" EntitySet="AchievedElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleEnrollments_AssignmentSubmission" Association="Self.FK_ModuleEnrollments_AssignmentSubmission">
+            <End Role="AssignmentSubmission" EntitySet="AssignmentSubmissions" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkingSOverview_MarkingOverviewTitles1" Association="Self.FK_MarkingSOverview_MarkingOverviewTitles1">
+            <End Role="MarkingOverviewTitles" EntitySet="MarkingOverviewTitles" />
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkingSOverview_ModuleDetails" Association="Self.FK_MarkingSOverview_ModuleDetails">
+            <End Role="ModuleDetails" EntitySet="ModuleDetails" />
+            <End Role="MarkingScheduleOverview" EntitySet="MarkingScheduleOverviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModulesAssignedToStudents_ModuleDetails" Association="Self.FK_ModulesAssignedToStudents_ModuleDetails">
+            <End Role="ModuleDetails" EntitySet="ModuleDetails" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleEnrollments_Results" Association="Self.FK_ModuleEnrollments_Results">
+            <End Role="Results" EntitySet="Results" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModulesAssignedToStudents_StudentDetails" Association="Self.FK_ModulesAssignedToStudents_StudentDetails">
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+            <End Role="ModuleEnrollments" EntitySet="ModuleEnrollments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentPortalDBModelStoreContainer" CdmEntityContainer="StudentPortalDBEntities2">
+          <EntitySetMapping Name="AchievedElements">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.AchievedElement">
+              <MappingFragment StoreEntitySet="AchievedElements">
+                <ScalarProperty Name="AchevedID" ColumnName="AchevedID" />
+                <ScalarProperty Name="ResultFk" ColumnName="ResultFk" />
+                <ScalarProperty Name="MSOverviewFK" ColumnName="MSOverviewFK" />
+                <ScalarProperty Name="AchievedItem" ColumnName="AchievedItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignmentSubmissions">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.AssignmentSubmission">
+              <MappingFragment StoreEntitySet="AssignmentSubmission">
+                <ScalarProperty Name="AssignmentSubmittedID" ColumnName="AssignmentSubmittedID" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="LinkToFile" ColumnName="LinkToFile" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkingOverviewTitles">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.MarkingOverviewTitle">
+              <MappingFragment StoreEntitySet="MarkingOverviewTitles">
+                <ScalarProperty Name="OverviewTitleID" ColumnName="OverviewTitleID" />
+                <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkingScheduleOverviews">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.MarkingScheduleOverview">
+              <MappingFragment StoreEntitySet="MarkingScheduleOverview">
+                <ScalarProperty Name="MSOverviewID" ColumnName="MSOverviewID" />
+                <ScalarProperty Name="ModuleFK" ColumnName="ModuleFK" />
+                <ScalarProperty Name="OverviewTitleFK" ColumnName="OverviewTitleFK" />
+                <ScalarProperty Name="CommentItem" ColumnName="CommentItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkingScheduleTables">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.MarkingScheduleTable">
+              <MappingFragment StoreEntitySet="MarkingScheduleTable">
+                <ScalarProperty Name="MarkingScheduleID" ColumnName="MarkingScheduleID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Excellent100" ColumnName="Excellent100" />
+                <ScalarProperty Name="ExcelentMark" ColumnName="ExcelentMark" />
+                <ScalarProperty Name="Adequate80" ColumnName="Adequate80" />
+                <ScalarProperty Name="AdequateMark" ColumnName="AdequateMark" />
+                <ScalarProperty Name="Poor60" ColumnName="Poor60" />
+                <ScalarProperty Name="PoorMark" ColumnName="PoorMark" />
+                <ScalarProperty Name="NotMet0" ColumnName="NotMet0" />
+                <ScalarProperty Name="NotMetMark" ColumnName="NotMetMark" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleDetails">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.ModuleDetail">
+              <MappingFragment StoreEntitySet="ModuleDetails">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleDescription" ColumnName="ModuleDescription" />
+                <ScalarProperty Name="AssignmentFile" ColumnName="AssignmentFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleEnrollments">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.ModuleEnrollment">
+              <MappingFragment StoreEntitySet="ModuleEnrollments">
+                <ScalarProperty Name="ModulesAssignedID" ColumnName="ModulesAssignedID" />
+                <ScalarProperty Name="StudentFk" ColumnName="StudentFk" />
+                <ScalarProperty Name="ModuleFk" ColumnName="ModuleFk" />
+                <ScalarProperty Name="ReslutsFK" ColumnName="ReslutsFK" />
+                <ScalarProperty Name="AssignmentSubmissionFK" ColumnName="AssignmentSubmissionFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.Result">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="ResultsID" ColumnName="ResultsID" />
+                <ScalarProperty Name="Mark1" ColumnName="Mark1" />
+                <ScalarProperty Name="Mark2" ColumnName="Mark2" />
+                <ScalarProperty Name="Mark3" ColumnName="Mark3" />
+                <ScalarProperty Name="Mark4" ColumnName="Mark4" />
+                <ScalarProperty Name="Mark5" ColumnName="Mark5" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails">
+            <EntityTypeMapping TypeName="StudentPortalDBModel.StudentDetail">
+              <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="DateEnrolled" ColumnName="DateEnrolled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
