@@ -45,29 +45,31 @@
        
 
     </dl>
-    <table class="table table-bordered">
+    @*<table class="table table-bordered">@*For each title in my module i want to display the list of comments attached to that titleID
+    @foreach (var myItem in Model.MarkingScheduleOverviews)
+    {
+        <tr>
 
-        @*For each title in my module i want to display the list of comments attached to that titleID*@
-        @foreach (var myItem in Model.MarkingScheduleOverviews)
-            {
-            <tr>
-                <th>Achieved</th>
-                <td>@Html.LabelFor(m => m.MarkingScheduleOverviews, myItem.MarkingOverviewTitle)</td>
-            </tr>
-                <tr>
-                    <td>
-                        @for (int i = 0; i < Model.MarkingScheduleOverviews.Count; i++)
-                        {
-                            //if (myItem.myOverviewTitle == Model.MyResults.myAchievedList[i].OverviewTitle)
-                            //{
-                                <p>@Html.DisplayFor(c => c.MarkingScheduleOverviews)</p>
-                            //}
-                        }
-                    </td>
-                </tr>
+            <td>@Html.Label(myItem.MarkingOverviewTitle.TitleName)</td>
+        </tr>
 
+        if (myItem.OverviewTitleFK == myItem.MarkingOverviewTitle.OverviewTitleID)
+        {
+
+        <tr>
+
+            <td>
+
+                        <p>@Html.Display(myItem.CommentItem)</p>
+                   
+                
+            </td>
+        </tr>
         }
-    </table>
+
+
+    }</table>*@
+
 
 </div>
 <p>
