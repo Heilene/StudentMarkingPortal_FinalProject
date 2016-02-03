@@ -6,71 +6,72 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>ModuleDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ModuleCode)
-        </dt>
+<div class="row">
+    <div class="col-md-4">
+        <h4>Module Detail</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ModuleCode)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModuleCode)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ModuleCode)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModuleName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModuleName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModuleName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ModuleName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModuleDescription)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModuleDescription)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModuleDescription)
-        </dd>
-@*
-    <dt>
-        @Html.DisplayNameFor(model => model.AssignmentFile)
-    </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ModuleDescription)
+            </dd>
+            @*
+                <dt>
+                    @Html.DisplayNameFor(model => model.AssignmentFile)
+                </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.AssignmentFile)
-    </dd>*@
-
-       
-
-    </dl>
-    @*<table class="table table-bordered">@*For each title in my module i want to display the list of comments attached to that titleID
-    @foreach (var myItem in Model.MarkingScheduleOverviews)
-    {
-        <tr>
-
-            <td>@Html.Label(myItem.MarkingOverviewTitle.TitleName)</td>
-        </tr>
-
-        if (myItem.OverviewTitleFK == myItem.MarkingOverviewTitle.OverviewTitleID)
-        {
-
-        <tr>
-
-            <td>
-
-                        <p>@Html.Display(myItem.CommentItem)</p>
-                   
-                
-            </td>
-        </tr>
-        }
+                <dd>
+                    @Html.DisplayFor(model => model.AssignmentFile)
+                </dd>*@
 
 
-    }</table>*@
+
+        </dl>
 
 
+
+
+
+    </div>
+
+    <div class="col-md-8">
+
+        <h4>Marking Overview</h4>
+
+        <table class="table table-bordered">@*For each title in my module i want to display the list of comments attached to that titleID*@
+
+                <tr>
+                    <td>
+                    @*Displays comments for each Marking Schedule Title*@
+                    @foreach (var myItem in Model.MarkingScheduleOverviews)
+                    {
+                        <p>@Html.Label(myItem.CommentItem)</p>
+                    }
+                    </td>
+                </tr>
+            
+        
+        </table>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ModuleID }) |

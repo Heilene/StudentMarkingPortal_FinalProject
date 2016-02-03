@@ -56,20 +56,20 @@
             </dd>
 
             @*<dt>
-                @Html.DisplayNameFor(model => model.Picture)
-            </dt>
+                    @Html.DisplayNameFor(model => model.Picture)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Picture)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Picture)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.DateEnrolled)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateEnrolled)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.DateEnrolled)
-            </dd>*@
+                <dd>
+                    @Html.DisplayFor(model => model.DateEnrolled)
+                </dd>*@
         </dl>
         <p>
             @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
@@ -99,14 +99,19 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.ModuleDetail.ModuleName) @*Add the name for each module*@
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action( "MarkingToolView", "StudentDetails",  new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID})'">Mark</button></td>
+                            @if (item.ReslutsFK == null)
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action( "MarkingToolView", "StudentDetails",  new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID})'">Mark</button>
+                                </td>
+                            }
 
-                                @if (item.ReslutsFK != null)
-                                {
-                                    <td><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ResultView", "StudentDetails", new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID })'">Result</button></td>
-                                }
-                                                        
+
+                            @if (item.ReslutsFK != null)
+                            {
+                                <td><button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("ResultView", "StudentDetails", new { id = item.ModuleDetail.ModuleID, studentId = Model.StudentID })'">Result</button></td>
+                            }
+
                         </tr>
                     }
                 </table>

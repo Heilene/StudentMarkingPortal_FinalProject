@@ -85,6 +85,7 @@ namespace VisionCollegeDSEDMarkingPortal.Controllers
             //Viewbags
             ViewBag.ModuleDeets = string.Format("{0} - {1}", MyResults.MCode, MyResults.MName);
             ViewBag.StudentDeets = string.Format("{0}", MyResults.SFullName);
+            
            
 
             return View(MyMarkingVM);
@@ -147,6 +148,7 @@ namespace VisionCollegeDSEDMarkingPortal.Controllers
             //Viewbags
             ViewBag.ModuleDeets = string.Format("{0} - {1}", ResultViewModel.MyResults.MCode, ResultViewModel.MyResults.MName);
             ViewBag.StudentDeets = string.Format("{0}", ResultViewModel.MyResults.SFullName);
+            ViewBag.ModuleDescription = string.Format("{0}", ResultViewModel.MyResults.ModuleDescription);
             return View(ResultViewModel);
         }
 

@@ -3,11 +3,11 @@
     ViewBag.Title = "ResultView";
 }
 
-<h2>Results</h2>
+<h2>Results - @ViewBag.StudentDeets</h2>
 
 <h2 class="text-primary">@ViewBag.ModuleDeets</h2>
+<p>@ViewBag.ModuleDescription</p>
 
-<h3>@ViewBag.StudentDeets</h3>
 
 <h3 class="text-primary">@Html.DisplayNameFor(m => m.MyResults.RSummary)</h3>
 

@@ -27,6 +27,7 @@ namespace VisionCollegeDSEDMarkingPortal.DTO
         public List<MarkingOverviewDTO> myAchievedList { get; set; }
         public int EnrollmentID { get; set; }
         public int? ResultID { get; set; }
+        public string ModuleDescription { get; set; }
 
 
     }

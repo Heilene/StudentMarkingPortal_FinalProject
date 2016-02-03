@@ -47,6 +47,7 @@ namespace VisionCollegeDSEDMarkingPortal.Repositories
                     myStudent.ModuleID = student.ModuleID;
 
 
+
                 }
                 return myStudent;
             }
@@ -160,7 +161,8 @@ namespace VisionCollegeDSEDMarkingPortal.Repositories
                          r.Total,
                          m.ModuleCode,
                          m.ModuleName,
-                         m.ModuleID
+                         m.ModuleID,
+                         m.ModuleDescription
                          
 
                      };
@@ -181,6 +183,7 @@ namespace VisionCollegeDSEDMarkingPortal.Repositories
                     MyStudentsResults.RSummary = result.Summary;
                     MyStudentsResults.ResultID = result.ResultsID;
                     MyStudentsResults.ModuleID = result.ModuleID;
+                    MyStudentsResults.ModuleDescription = result.ModuleDescription;
 
                     //add achievement list per result ID
                     MyStudentsResults.myAchievedList = GetAchevedList(result.ResultsID);
@@ -188,7 +191,11 @@ namespace VisionCollegeDSEDMarkingPortal.Repositories
             }
             return MyStudentsResults;
         }
-
+        /// <summary>
+        /// Retrieve Achieved List using the Result/Student relationship from the Marking Overview and Titles
+        /// </summary>
+        /// <param name="MyResultID"></param>
+        /// <returns></returns>
         public List<MarkingOverviewDTO> GetAchevedList(int MyResultID)
         {
             List<MarkingOverviewDTO> MyAchievedList = new List<MarkingOverviewDTO>();
@@ -274,7 +281,7 @@ namespace VisionCollegeDSEDMarkingPortal.Repositories
         }
 
      /// <summary>
-     /// Test values against table marks to change cell background color
+     /// Test values against table marks to change cell background colour according to value selected
      /// </summary>
      /// <param name="MyValues"></param>
      /// <param name="MyMark"></param>
